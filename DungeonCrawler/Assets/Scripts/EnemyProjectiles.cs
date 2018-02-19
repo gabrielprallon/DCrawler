@@ -9,6 +9,8 @@ public class EnemyProjectiles : MonoBehaviour
     [SerializeField]
     private Rigidbody2D m_RB;
     private Vector2 m_Direction;
+    [SerializeField]
+    private float m_ProjectileDamage = 0.2f;
     private void Start()
     {
         m_Direction = Vector2.right;
@@ -25,6 +27,17 @@ public class EnemyProjectiles : MonoBehaviour
     private void OnBecameInvisible()
     {
         Destroy(gameObject);
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        HealthSystem hero = other.gameObject.GetComponent<HealthSystem>();
+
+        if (hero)
+        {
+            hero.Damage(m_ProjectileDamage);
+            Destroy(gameObject);
+        }
+
     }
 }    
 

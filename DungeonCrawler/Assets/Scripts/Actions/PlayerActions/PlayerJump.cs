@@ -40,32 +40,14 @@ namespace FeatherSword.Actions {
         {
             m_PC.m_Animator[0].SetFloat("VelocityY", m_CachedRigidbody.velocity.y);
             m_PC.m_Animator[1].SetFloat("VelocityY", m_CachedRigidbody.velocity.y);
-            if (!m_PC.IsGrounded)
+            if (m_PC.IsGrounded)
             {
-                if (m_StartJump) {
-                    m_PC.m_Animator[0].ResetTrigger("Landing");
-                    if (m_CachedRigidbody.velocity.y >= m_Adjustment || m_CachedRigidbody.velocity.y <= m_Adjustment)
-                    {
-
-                        m_PC.m_Animator[0].SetTrigger("Jump");
-                        m_PC.m_Animator[1].SetTrigger("Jump");
-                        m_StartJump = false;
-
-                    }
+                if (m_PC.m_Animator[0].GetCurrentAnimatorStateInfo(0).IsTag("Jump"))
+                {
+                    m_PC.m_Animator[0].SetTrigger("Landing");
+                    m_PC.m_Animator[1].SetTrigger("Landing");
                 }
             }
-            else
-            {
-                
-                m_PC.m_Animator[0].SetTrigger("Landing");
-                m_PC.m_Animator[1].SetTrigger("Landing");
-
-            }
-
-
-
-
-
         }
         public void Jump(Rigidbody2D RB, float JumpSpeed, bool status)
         {
@@ -73,7 +55,8 @@ namespace FeatherSword.Actions {
             {
 
                 m_StartJump = true;
-                m_PC.m_Animator[0].SetBool("IsJumping", true);
+                m_PC.m_Animator[0].SetTrigger("Jump");
+                m_PC.m_Animator[1].SetTrigger("Jump");
                 StartCoroutine(StartJump(RB));
 
 
@@ -88,7 +71,6 @@ namespace FeatherSword.Actions {
         private void ActualJump(Rigidbody2D RB)
         {
             RB.AddForce(new Vector2(0, m_JumpSpeed), ForceMode2D.Impulse);
-            m_PC.m_Animator[0].SetBool("IsJumping", false);
 
         }
 

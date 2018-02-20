@@ -47,7 +47,6 @@ public class PlayerController : MonoBehaviour {
 
     private void Update()
     {
-        Debug.Log("is Grounded " + IsGrounded);
         float horizontalMovement = InputManager.Instance.GetHorizontalInput(m_PlayerID);
 
         buttonInput[0] = (InputManager.Instance.GetJumpInput(m_PlayerID));
@@ -123,7 +122,8 @@ public class PlayerController : MonoBehaviour {
     {
         Vector2 Position = new Vector2(transform.position.x + m_GroundDetectionOffset.x, transform.position.y + m_GroundDetectionOffset.y);
         m_IsGrounded = Physics2D.CircleCast(Position, m_CircleCastRadius, Vector2.down, m_GroundCheckDist, m_GroundLayer);
-        
+        m_Animator[0].SetBool("IsGrounded", m_IsGrounded);
+        m_Animator[1].SetBool("IsGrounded", m_IsGrounded);
         return IsGrounded;
     }
 

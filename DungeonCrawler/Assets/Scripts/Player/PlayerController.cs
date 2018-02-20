@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour {
     private float m_CircleCastRadius;
     [SerializeField]
     private Vector3 m_GroundDetectionOffset;
+    [SerializeField]
+    private Collider2D m_GroundStableCollider;
 
     private bool[] buttonInput = new bool[5];
     public int m_PlayerID = 0;
@@ -121,12 +123,32 @@ public class PlayerController : MonoBehaviour {
     public bool CheckForGround()
     {
         Vector2 Position = new Vector2(transform.position.x + m_GroundDetectionOffset.x, transform.position.y + m_GroundDetectionOffset.y);
-        m_IsGrounded = Physics2D.CircleCast(Position, m_CircleCastRadius, Vector2.down, m_GroundCheckDist, m_GroundLayer);
-        m_Animator[0].SetBool("IsGrounded", m_IsGrounded);
+        var grounded = Physics2D.CircleCast(Position, m_CircleCastRadius, Vector2.down, m_GroundCheckDist, m_GroundLayer);
+        if(!m_IsGrounded && grounded)
+        {
+            OnHitGround();
+        }
+        if (m_IsGrounded && !grounded)
+        {
+            OnLeaveGround();
+        }
+        m_IsGrounded = grounded;
+		m_Animator[0].SetBool("IsGrounded", m_IsGrounded);
         m_Animator[1].SetBool("IsGrounded", m_IsGrounded);
         return IsGrounded;
     }
 
+    protected void OnHitGround()
+    {
+        if (m_GroundStableCollider)
+            m_GroundStableCollider.enabled = true;
+    }
+
+    protected void OnLeaveGround()
+    {
+        if(m_GroundStableCollider)
+            m_GroundStableCollider.enabled = false;
+    }
     void OnDrawGizmos()
     {
         if (m_ShowGroundDetectionDebug)

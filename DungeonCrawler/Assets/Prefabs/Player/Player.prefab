@@ -11,6 +11,22 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1393414929310278}
   m_IsPrefabParent: 1
+--- !u!1 &1191307700328754
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4092918909302594}
+  - component: {fileID: 61386109595114668}
+  m_Layer: 11
+  m_Name: GroundCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1393414929310278
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,6 +201,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4092918909302594
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1191307700328754}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.014, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4403857143829706}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4403857143829706
 Transform:
   m_ObjectHideFlags: 1
@@ -192,11 +221,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1393414929310278}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.26, z: 0}
+  m_LocalPosition: {x: 0, y: 0.86, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4705552950686770}
   - {fileID: 4556183585350168}
+  - {fileID: 4092918909302594}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5732,7 +5762,7 @@ PolygonCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1425168467264708}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -8408,7 +8438,7 @@ PolygonCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1425168467264708}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -12258,6 +12288,31 @@ PolygonCollider2D:
       - {x: -0.3764706, y: -1.4117647}
       - {x: -0.42352942, y: -1.4117647}
       - {x: -0.42352942, y: -1.4588236}
+--- !u!61 &61386109595114668
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1191307700328754}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.12, y: 1}
+  m_EdgeRadius: 0
 --- !u!95 &95249064240063638
 Animator:
   serializedVersion: 3
@@ -12315,6 +12370,7 @@ MonoBehaviour:
   m_GroundCheckDist: 1
   m_CircleCastRadius: 0.25
   m_GroundDetectionOffset: {x: 0, y: -0.3, z: 0}
+  m_GroundStableCollider: {fileID: 61386109595114668}
   m_PlayerID: 0
 --- !u!114 &114382271858025390
 MonoBehaviour:
@@ -30022,6 +30078,7 @@ MonoBehaviour:
   m_CachedRigidbody: {fileID: 0}
   m_JumpSpeed: 10
   m_Adjustment: 0.2
+  m_JumpPrepTime: 0.2
 --- !u!114 &114856530159541182
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -30071,14 +30128,14 @@ MonoBehaviour:
   mCustomAtlasFrameRotation: 0
   mApplySmoothMovesScaleAnim: 1
   mGroupSuffix: 
-  mColliderMeshFilename: Atlas_0_Idle Sprite (hero) (64x64)_0_A5181E71.dae
+  mColliderMeshFilename: Atlas_0_Idle Sprite (hero) (64x64)_4_A5181E71.dae
   mWasInitialized: 1
   mMainTex: {fileID: 2800000, guid: 484219c16d04cf646aa9a13f1f8c08d0, type: 3}
   mColliderMeshDirectory: Assets/Colliders/Generated
   mIsAtlasUsed: 1
   mAtlasFrameIndex: 0
-  mAtlasFrameTitle: Idle Sprite (hero) (64x64)_0
-  mAtlasFramePositionInPixels: {x: 0, y: 0}
+  mAtlasFrameTitle: Idle Sprite (hero) (64x64)_4
+  mAtlasFramePositionInPixels: {x: 256, y: 0}
   mAtlasFrameSizeInPixels: {x: 64, y: 64}
   mAtlasFrameRotation: 0
   mOutlineScale: {x: 3.0117648, y: 3.0117648}
@@ -30096,7 +30153,7 @@ MonoBehaviour:
   mHasUnity43SpriteAnimatorComponent: 1
   mHasUGUIImageSpriteComponent: 0
   mColliderRegions: []
-  mActiveColliderIndex: 0
+  mActiveColliderIndex: 4
   mGeneratedColliderData:
   - mBinaryImageWidth: 64
     mBinaryImageHeight: 64
@@ -59083,7 +59140,7 @@ SpriteRenderer:
   m_SortingLayerID: 1637228019
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 484219c16d04cf646aa9a13f1f8c08d0, type: 3}
+  m_Sprite: {fileID: 21300008, guid: 484219c16d04cf646aa9a13f1f8c08d0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

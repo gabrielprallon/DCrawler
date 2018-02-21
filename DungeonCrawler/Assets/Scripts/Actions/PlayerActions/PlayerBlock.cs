@@ -26,17 +26,16 @@ namespace FeatherSword.Actions
             if (m_PC)
                 m_PC.RegisterUpdateAction(this);
             m_BlockTimer = m_BlockCd;
-
-
         }
+
         public override void DoAction(float data, bool status)
         {
             base.DoAction(data, status);
             Block(m_CachedRigidbody, status);
         }
+
         public void Block(Rigidbody2D RB, bool status)
-        {
-            
+        {            
             if (status && !m_IsBlocking)
             {
                 ToBlockPosition(RB);
@@ -46,19 +45,11 @@ namespace FeatherSword.Actions
             {
                 ToStopBlockingPos();
             }
-
-           
-
         }
 
         private void ToBlockPosition(Rigidbody2D RB)
         {
-            m_PC.m_Animator[0].SetTrigger("ToBlockPos");
-            m_PC.m_Animator[1].SetTrigger("ToBlockPos");
-            m_PC.m_Animator[0].SetBool("IdleBlocking", true);
-            m_PC.m_Animator[1].SetBool("IdleBlocking", true);
-            m_PC.m_Animator[0].ResetTrigger("Blocked");
-            m_PC.m_Animator[1].ResetTrigger("Blocked");
+            m_PC.SetAnimatorTrigger(PlayerController.AnimationTriggers.StartBlock);
             m_IsBlocking = true;
             m_BlockTrigger.enabled = true;
             m_ActivateBlock = false;
@@ -67,14 +58,7 @@ namespace FeatherSword.Actions
         }
         private void ToStopBlockingPos()
         {
-            m_PC.m_Animator[0].SetBool("IdleBlocking", false);
-            m_PC.m_Animator[1].SetBool("IdleBlocking", false);
-            m_PC.m_Animator[0].SetTrigger("StopBlocking");
-            m_PC.m_Animator[1].SetTrigger("StopBlocking");
-            m_PC.m_Animator[0].ResetTrigger("ToBlockPosition");
-            m_PC.m_Animator[1].ResetTrigger("ToBlockPosition");
-            m_PC.m_Animator[0].ResetTrigger("Blocked");
-            m_PC.m_Animator[1].ResetTrigger("Blocked");
+            m_PC.SetAnimatorTrigger(PlayerController.AnimationTriggers.EndBlock);
             m_IsBlocking = false;
             m_BlockTrigger.enabled = false;
             m_BlockTimer = m_BlockCd;
@@ -82,9 +66,7 @@ namespace FeatherSword.Actions
         }
         public void ObjectBlocked()
         {
-            m_PC.m_Animator[0].SetTrigger("Blocked");
-            m_PC.m_Animator[1].SetTrigger("Blocked");
-                   
+            m_PC.SetAnimatorTrigger(PlayerController.AnimationTriggers.ReactBlock);
         }
         
     }

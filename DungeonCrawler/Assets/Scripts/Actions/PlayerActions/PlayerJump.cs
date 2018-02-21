@@ -28,8 +28,12 @@ namespace FeatherSword.Actions {
                 m_CachedRigidbody = GetComponent<Rigidbody2D>();
             m_PC = GetComponent<PlayerController>();
             if (m_PC)
+            {
+                m_PC.onHitGroundEvent += OnHitGround;
                 m_PC.RegisterUpdateAction(this);
+            }
         }
+
         public override void DoAction(float data, bool status)
         {
             base.DoAction(data, status);
@@ -38,45 +42,41 @@ namespace FeatherSword.Actions {
 
         private void Update()
         {
-            m_PC.m_Animator[0].SetFloat("VelocityY", m_CachedRigidbody.velocity.y);
-            m_PC.m_Animator[1].SetFloat("VelocityY", m_CachedRigidbody.velocity.y);
-            if (m_PC.IsGrounded)
+            m_PC.SetAnimatorFloat("VelocityY", m_CachedRigidbody.velocity.y);
+        }
+
+        public void OnHitGround()
+        {
+            if (m_PC.IsInAnimationTag("Jump"))
             {
-                if (m_PC.m_Animator[0].GetCurrentAnimatorStateInfo(0).IsTag("Jump"))
-                {
-                    m_PC.m_Animator[0].SetTrigger("Landing");
-                    m_PC.m_Animator[1].SetTrigger("Landing");
-                }
+                m_PC.SetAnimatorTrigger(PlayerController.AnimationTriggers.EndJump);
             }
         }
+
         public void Jump(Rigidbody2D RB, float JumpSpeed, bool status)
         {
             if (m_PC.IsGrounded && status)
             {
 
                 m_StartJump = true;
-                m_PC.m_Animator[0].SetTrigger("Jump");
-                m_PC.m_Animator[1].SetTrigger("Jump");
+                m_PC.SetAnimatorTrigger(PlayerController.AnimationTriggers.StartJump);
                 StartCoroutine(StartJump(RB));
 
 
             }
 
         }
+
         private IEnumerator StartJump(Rigidbody2D RB)
         {
             yield return new WaitForSeconds(m_JumpPrepTime);
             ActualJump(RB);
         }
+
         private void ActualJump(Rigidbody2D RB)
         {
             RB.AddForce(new Vector2(0, m_JumpSpeed), ForceMode2D.Impulse);
-
         }
-
-
-        
-
     }
 }
 

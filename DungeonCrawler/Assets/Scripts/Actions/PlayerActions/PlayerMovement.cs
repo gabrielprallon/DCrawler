@@ -51,24 +51,14 @@ namespace FeatherSword.Actions {
         }
         private void Update()
         {
-            if (m_MoveDirection.x >= m_Adjustment || m_MoveDirection.x <= -m_Adjustment)
-            {
-                m_PC.m_Animator[0].SetBool("IsRunning", true);
-                m_PC.m_Animator[1].SetBool("IsRunning", true);
-            }
-            else
-            {
-                m_PC.m_Animator[0].SetBool("IsRunning", false);
-                m_PC.m_Animator[1].SetBool("IsRunning", false);
-            }
         }
-        private bool IsAttacking()
+        private bool IsDoingSomething()
         {
-            return m_PC.m_Animator[0].GetCurrentAnimatorStateInfo(0).IsTag("Attack");
-        }
-        private bool IsBlocking()
-        {
-            return m_PC.m_Animator[0].GetCurrentAnimatorStateInfo(0).IsTag("Block");
+            return m_PC.IsInAnimationTag("Attack") 
+                || m_PC.IsInAnimationTag("Block") 
+                || m_PC.IsInAnimationTag("Jump") 
+                || m_PC.IsInAnimationTag("Dodge") 
+                || m_PC.IsInAnimationTag("Damage");
         }
 
         public void Move(Rigidbody2D RB, float moveSpeed, float horizontalDirection) {
@@ -79,7 +69,7 @@ namespace FeatherSword.Actions {
             if (m_PC.IsGrounded && m_MovementType == MovementType.AIR)
                 return;
             
-            if (!IsAttacking() && !IsBlocking()) 
+            if (!IsDoingSomething()) 
             {
                 m_MoveDirection = new Vector3(horizontalDirection, 0);
                 
@@ -100,6 +90,17 @@ namespace FeatherSword.Actions {
                 if (m_MovementControl == MovementControl.FORCE)
                 {
                     RB.AddForce(m_MoveDirection, m_ForceMode);
+                }
+
+                if (m_MoveDirection.x >= m_Adjustment || m_MoveDirection.x <= -m_Adjustment)
+                {
+                    if(!m_PC.IsInAnimationState("Running"))
+                        m_PC.SetAnimatorTrigger(PlayerController.AnimationTriggers.StartRun);
+                }
+                else
+                {
+                    if (!m_PC.IsInAnimationState("Idle"))
+                        m_PC.SetAnimatorTrigger(PlayerController.AnimationTriggers.Idle);
                 }
             }
             else

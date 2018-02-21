@@ -43,8 +43,7 @@ public class HealthSystem : MonoBehaviour {
         if(gameObject.tag == "Body")
         {
             m_RB.velocity = Vector2.zero;
-            m_PC.m_Animator[0].SetTrigger("Damage");
-            m_PC.m_Animator[1].SetTrigger("Damage");
+            m_PC.SetAnimatorTrigger(PlayerController.AnimationTriggers.Damage);
         }
     }
 

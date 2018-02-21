@@ -155,6 +155,16 @@ Prefab:
       propertyPath: m_Name
       value: Player (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 95303116129935246, guid: 436160549d6b4714f8eadf633db749cb,
+        type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: e9646068692aaac40a28dcd1a2b6c169, type: 2}
+    - target: {fileID: 95249064240063638, guid: 436160549d6b4714f8eadf633db749cb,
+        type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: d358c35d665bd39458ca0ad52ae82032, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 436160549d6b4714f8eadf633db749cb, type: 2}
   m_IsPrefabParent: 0
@@ -1186,7 +1196,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 15
+  orthographic size: 5.3387566
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1208,7 +1218,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2026067646}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -100}
+  m_LocalPosition: {x: 0, y: -0.06, z: -100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

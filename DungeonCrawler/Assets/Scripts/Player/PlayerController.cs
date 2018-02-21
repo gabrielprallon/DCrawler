@@ -5,13 +5,34 @@ using FeatherSword.Actions;
 using FeatherSword.Input;
 
 public class PlayerController : MonoBehaviour {
-    
+    public class AnimationTriggers
+    {
+        public AnimationTriggers(string value) { Value = value; }
+
+        public string Value;
+
+        public static AnimationTriggers Jump        { get { return new AnimationTriggers("Jumping"); } }
+        public static AnimationTriggers Attack1     { get { return new AnimationTriggers("Attack1"); } }
+        public static AnimationTriggers Attack2     { get { return new AnimationTriggers("Attack2"); } }
+        public static AnimationTriggers Attack3     { get { return new AnimationTriggers("Attack3"); } }
+        public static AnimationTriggers StartBlock  { get { return new AnimationTriggers("ToBlockPos"); } }
+        public static AnimationTriggers EndBlock    { get { return new AnimationTriggers("StopBlocking"); } }
+        public static AnimationTriggers ReactBlock  { get { return new AnimationTriggers("Blocked"); } }
+        public static AnimationTriggers Dodge       { get { return new AnimationTriggers("Dodge"); } }
+        public static AnimationTriggers Idle        { get { return new AnimationTriggers("Idle"); } }
+        public static AnimationTriggers Damage      { get { return new AnimationTriggers("Damage"); } }
+        public static AnimationTriggers StartRun    { get { return new AnimationTriggers("Run"); } }
+        public static AnimationTriggers StartJump   { get { return new AnimationTriggers("Jumping"); } }
+        public static AnimationTriggers EndJump     { get { return new AnimationTriggers("Landing"); } }
+    }
+
     [SerializeField]
     private List<ActionBase> m_UpdateActions = new List<ActionBase>();
     [SerializeField]
     private List<ActionBase> m_FixedUpdateActions = new List<ActionBase>();
-    
-    public List<Animator> m_Animator = new List<Animator>(); //0 body, 1 Weapon
+
+    [SerializeField]
+    private List<Animator> m_Animator = new List<Animator>(); //0 body, 1 Weapon
     
     private bool m_IsGrounded = false;
     [Header("Ground detection")]
@@ -31,16 +52,14 @@ public class PlayerController : MonoBehaviour {
     private bool[] buttonInput = new bool[5];
     public int m_PlayerID = 0;
 
-    /*public bool IsGrounded {
-        get { return m_IsGrounded; }
-        set { m_IsGrounded = value; }
-    }*/
+    // simple events
+    public delegate void OnHitGroundEvent();
+    public delegate void OnLeaveGroundEvent();
 
-    public List<Animator> Animator
-    {
-        get { return m_Animator; }
-        set { m_Animator = value; }
-    }
+    public event OnHitGroundEvent onHitGroundEvent;
+    public event OnLeaveGroundEvent onLeaveGroundEvent;
+    //
+
 
     public bool IsGrounded
     {
@@ -120,6 +139,32 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    public bool IsInAnimationTag(string tag)
+    {
+        foreach (Animator anim in m_Animator)
+            if (anim.GetCurrentAnimatorStateInfo(0).IsTag(tag))
+                return true;
+        return false;
+    }
+    public bool IsInAnimationState(string state)
+    {
+        foreach (Animator anim in m_Animator)
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName(state))
+                return true;
+        return false;
+    }
+
+    public void SetAnimatorTrigger(AnimationTriggers trigger)
+    {
+        foreach(Animator anim in m_Animator)
+            anim.SetTrigger(trigger.Value);
+    }
+    public void SetAnimatorFloat(string parameter, float value)
+    {
+        foreach (Animator anim in m_Animator)
+            anim.SetFloat(parameter, value);
+    }
+
     public bool CheckForGround()
     {
         Vector2 Position = new Vector2(transform.position.x + m_GroundDetectionOffset.x, transform.position.y + m_GroundDetectionOffset.y);
@@ -133,8 +178,6 @@ public class PlayerController : MonoBehaviour {
             OnLeaveGround();
         }
         m_IsGrounded = grounded;
-		m_Animator[0].SetBool("IsGrounded", m_IsGrounded);
-        m_Animator[1].SetBool("IsGrounded", m_IsGrounded);
         return IsGrounded;
     }
 
@@ -142,12 +185,20 @@ public class PlayerController : MonoBehaviour {
     {
         if (m_GroundStableCollider)
             m_GroundStableCollider.enabled = true;
+        if(onHitGroundEvent != null)
+        {
+            onHitGroundEvent();
+        }
     }
 
     protected void OnLeaveGround()
     {
         if(m_GroundStableCollider)
             m_GroundStableCollider.enabled = false;
+        if (onLeaveGroundEvent != null)
+        {
+            onLeaveGroundEvent();
+        }
     }
     void OnDrawGizmos()
     {

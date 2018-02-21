@@ -32,10 +32,9 @@ namespace FeatherSword.Actions
         }
         public void Dodge(Rigidbody2D RB, bool status)
         {
-            if (status && !m_PC.m_Animator[0].GetCurrentAnimatorStateInfo(0).IsName("BodyDodge"))
+            if (status && !m_PC.IsInAnimationState("BodyDodge"))
             {
-                m_PC.m_Animator[0].SetTrigger("Dodge");
-                m_PC.m_Animator[1].SetTrigger("Dodge");
+                m_PC.SetAnimatorTrigger(PlayerController.AnimationTriggers.Dodge);
                 RB.AddForce(m_RollForce * transform.localScale.x, ForceMode2D.Impulse);
             }
         }

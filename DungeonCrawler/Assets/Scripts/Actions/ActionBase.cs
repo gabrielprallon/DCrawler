@@ -9,6 +9,10 @@ namespace FeatherSword.Actions
         [SerializeField]
         private int m_ActionID = -1;
 
+        public virtual void CallAction(int ID)
+        {
+            CallAction(ID, 0f, false);
+        }
         public virtual void CallAction(int ID, float data)
         {
             CallAction(ID, data, false);

@@ -12322,7 +12322,7 @@ Animator:
   m_GameObject: {fileID: 1410638410305316}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 52735bf23cea0d14a9c83ed2b299e231, type: 2}
+  m_Controller: {fileID: 9100000, guid: d358c35d665bd39458ca0ad52ae82032, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 1
   m_ApplyRootMotion: 1
@@ -12339,7 +12339,7 @@ Animator:
   m_GameObject: {fileID: 1425168467264708}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 65b0d0a14ed1edc4f971b1581c3a5bcc, type: 2}
+  m_Controller: {fileID: 9100000, guid: e9646068692aaac40a28dcd1a2b6c169, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 1
   m_ApplyRootMotion: 1
@@ -30093,7 +30093,6 @@ MonoBehaviour:
   m_ActionID: 2
   m_CachedRigidbody: {fileID: 0}
   m_RollForce: {x: 50, y: 0}
-  m_DodgeCd: 2
 --- !u!114 &114941293209014494
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -66,10 +66,11 @@ namespace FeatherSword.Actions
 
             /*
              * Action ID 0 = Horizontal Movement
-             * Action ID 1 = Jump
-             * Action ID 2 = Dodge/Dash
-             * Action ID 3 = Attack
-             * Action ID 4 = Block
+             * Action ID 1 = Vertical Movement
+             * Action ID 2 = Jump
+             * Action ID 3 = Dodge/Dash
+             * Action ID 4 = Attack
+             * Action ID 5 = Block
             */
             CheckForGround();
             foreach (ActionBase action in m_UpdateActions)
@@ -86,12 +87,12 @@ namespace FeatherSword.Actions
 
             /*
              * Action ID 0 = Horizontal Movement
-             * Action ID 1 = Jump
-             * Action ID 2 = Dodge/Dash
-             * Action ID 3 = Attack
-             * Action ID 4 = Block
+             * Action ID 1 = Vertical Movement
+             * Action ID 2 = Jump
+             * Action ID 3 = Dodge/Dash
+             * Action ID 4 = Attack
+             * Action ID 5 = Block
             */
-            CheckForGround();
             foreach (ActionBase action in m_FixedUpdateActions)
             {
                 action.CallAction(0);
@@ -99,6 +100,7 @@ namespace FeatherSword.Actions
                 action.CallAction(2);
                 action.CallAction(3);
                 action.CallAction(4);
+                action.CallAction(5);
             }
         }
         public void RegisterUpdateAction(ActionBase action)

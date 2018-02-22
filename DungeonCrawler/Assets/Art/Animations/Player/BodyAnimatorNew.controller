@@ -774,8 +774,8 @@ AnimatorStateTransition:
   m_ExitTime: 1
   m_HasExitTime: 0
   m_HasFixedDuration: 1
-  m_InterruptionSource: 1
-  m_OrderedInterruption: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 0
   m_CanTransitionToSelf: 1
 --- !u!1101 &1101645756173000474
 AnimatorStateTransition:
@@ -1729,14 +1729,14 @@ AnimatorStateMachine:
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 1101005657756790120}
-  - {fileID: 1101778786130948374}
+  - {fileID: 1101637588882294442}
   - {fileID: 1101492635316037820}
+  - {fileID: 1101242295692176050}
+  - {fileID: 1101310678560402544}
+  - {fileID: 1101881868143273352}
   - {fileID: 1101302272469457890}
   - {fileID: 1101999776580027858}
-  - {fileID: 1101881868143273352}
-  - {fileID: 1101310678560402544}
-  - {fileID: 1101242295692176050}
-  - {fileID: 1101637588882294442}
+  - {fileID: 1101778786130948374}
   m_EntryTransitions: []
   m_StateMachineTransitions:
   - first: {fileID: 0}

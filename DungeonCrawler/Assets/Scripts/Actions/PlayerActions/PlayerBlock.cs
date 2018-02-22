@@ -31,11 +31,12 @@ namespace FeatherSword.Actions
         }
 
         public void Block(Rigidbody2D RB, bool status)
-        {            
+        {
+            if (!m_PC.IsGrounded) return;
             if (status && !m_IsBlocking)
             {
                 ToBlockPosition(RB);
-
+                return;
             }
             if(!status && m_IsBlocking)
             {
@@ -46,6 +47,7 @@ namespace FeatherSword.Actions
         private void ToBlockPosition(Rigidbody2D RB)
         {
             m_PC.SetAnimatorTrigger(PlayerController.AnimationTriggers.StartBlock);
+            RB.velocity = new Vector2(0f, RB.velocity.y);
             m_IsBlocking = true;          
         }
 

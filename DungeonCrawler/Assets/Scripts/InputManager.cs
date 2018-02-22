@@ -71,9 +71,10 @@ namespace FeatherSword.Input
         public virtual bool GetBlockInput(int ID)
         {
             GetPlayer(ID);
-            m_KeyDown = m_Player.GetButtonDown("Block");
+            m_KeyDown = m_Player.GetButton("Block");//.GetButtonDown("Block");
             
-            if (m_Player.GetButtonSinglePressHold("Block")){
+            if (m_KeyDown)
+            {
                 return true;
             }
             else

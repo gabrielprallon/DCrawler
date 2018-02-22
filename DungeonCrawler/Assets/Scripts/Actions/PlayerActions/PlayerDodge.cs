@@ -36,7 +36,7 @@ namespace FeatherSword.Actions
         }
         private void Dodge(Rigidbody2D RB, bool status)
         {
-            if (status && !m_PC.IsInAnimationState("BodyDodge"))
+            if (status && !m_PC.IsInAnimationState("BodyDodge") && m_PC.IsGrounded)
             {
                 m_PC.SetAnimatorTrigger(PlayerController.AnimationTriggers.Dodge);
                 StartCoroutine(DodgeStop());

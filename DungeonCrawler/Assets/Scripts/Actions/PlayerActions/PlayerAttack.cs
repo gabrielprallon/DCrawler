@@ -17,7 +17,6 @@ namespace FeatherSword.Actions {
 
         private bool m_JustAttack = false;
         private bool m_AnimationFinished = false;
-        private bool m_Anim3Time;
         
 
         private void Start()

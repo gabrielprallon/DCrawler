@@ -16,7 +16,7 @@ public class PlayerBaseWeapon : MonoBehaviour {
         m_BlockAction = GetComponentInParent<PlayerBlock>();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
         HealthSystem enemy = other.gameObject.GetComponent<HealthSystem>();
         if (enemy)

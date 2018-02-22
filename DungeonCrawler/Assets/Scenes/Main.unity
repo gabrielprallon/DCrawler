@@ -726,10 +726,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114768173195089358, guid: 436160549d6b4714f8eadf633db749cb,
+    - target: {fileID: 114856530159541182, guid: 436160549d6b4714f8eadf633db749cb,
         type: 2}
-      propertyPath: m_JumpPrepTime
-      value: 0.01
+      propertyPath: m_RollForce.x
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 436160549d6b4714f8eadf633db749cb, type: 2}

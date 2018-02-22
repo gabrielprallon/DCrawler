@@ -8351,6 +8351,7 @@ MonoBehaviour:
   m_GroundDetectionOffset: {x: 0, y: -0.3, z: 0}
   m_GroundStableCollider: {fileID: 61386109595114668}
   m_PlayerID: 0
+  WantsToRun: 0
 --- !u!114 &114458775123793622
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8579,7 +8580,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ActionID: 2
   m_CachedRigidbody: {fileID: 0}
-  m_RollForce: {x: 50, y: 0}
+  m_RollForce: {x: 6, y: 0}
+  m_DodgeMaxXSpeed: 10
+  m_DodgeStopTime: 0.6
 --- !u!114 &114941293209014494
 MonoBehaviour:
   m_ObjectHideFlags: 1

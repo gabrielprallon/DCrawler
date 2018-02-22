@@ -59,12 +59,13 @@ public class PlayerController : MonoBehaviour {
     public event OnHitGroundEvent onHitGroundEvent;
     public event OnLeaveGroundEvent onLeaveGroundEvent;
     //
-
-
+    
     public bool IsGrounded
     {
         get { return m_IsGrounded; }
     }
+
+    public bool WantsToRun = false;
 
     private void Update()
     {

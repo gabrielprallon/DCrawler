@@ -68,7 +68,7 @@ namespace FeatherSword.Actions {
                 return;
             if (m_PC.IsGrounded && m_MovementType == MovementType.AIR)
                 return;
-            
+            m_PC.WantsToRun = horizontalDirection > 0f;
             if (!IsDoingSomething()) 
             {
                 m_MoveDirection = new Vector3(horizontalDirection, 0);

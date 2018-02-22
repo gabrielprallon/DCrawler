@@ -632,9 +632,9 @@ PlayerSettings:
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: 14bc6a69-9fca-446c-9443-6e275d2e9e75
-  projectName: DugeonCrawler
-  organizationId: gabrielprallon
+  cloudProjectId: 
+  projectName: 
+  organizationId: 
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

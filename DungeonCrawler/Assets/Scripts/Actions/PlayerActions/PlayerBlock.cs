@@ -15,8 +15,7 @@ namespace FeatherSword.Actions
         private float m_BlockTimer = 0f;
         [SerializeField]
         private float m_BlockCd = 2f;
-
-        public PolygonCollider2D m_BlockTrigger;
+        
 
         private void Start()
         {
@@ -51,7 +50,6 @@ namespace FeatherSword.Actions
         {
             m_PC.SetAnimatorTrigger(PlayerController.AnimationTriggers.StartBlock);
             m_IsBlocking = true;
-            m_BlockTrigger.enabled = true;
             m_ActivateBlock = false;
             
             
@@ -60,7 +58,6 @@ namespace FeatherSword.Actions
         {
             m_PC.SetAnimatorTrigger(PlayerController.AnimationTriggers.EndBlock);
             m_IsBlocking = false;
-            m_BlockTrigger.enabled = false;
             m_BlockTimer = m_BlockCd;
             m_ActivateBlock = false;
         }

@@ -13,7 +13,8 @@ public class HealthSystem : MonoBehaviour {
     private PlayerController m_PC;
     [SerializeField]
     private Rigidbody2D m_RB;
-
+    [SerializeField]
+    private AIController m_AI;
     [SerializeField]
     private PolygonCollider2D m_BodyCollider;
 	// Use this for initialization
@@ -21,13 +22,12 @@ public class HealthSystem : MonoBehaviour {
 
         m_CurHealth = m_MaxHealth;
         if(gameObject.tag == "Body")
-        {
-            m_PC = GetComponentInParent<PlayerController>();
-            m_RB = GetComponentInParent<Rigidbody2D>();
-        }
+            m_PC = GetComponent<PlayerController>();
+        if(gameObject.tag == "Enemy")
+            m_AI = GetComponent<AIController>();
+        m_RB = GetComponent<Rigidbody2D>();
 
-		
-	}
+    }
 	
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -45,6 +45,12 @@ public class HealthSystem : MonoBehaviour {
             m_RB.velocity = Vector2.zero;
             m_PC.SetAnimatorTrigger(PlayerController.AnimationTriggers.Damage);
         }
+        if(gameObject.tag == "Enemy")
+        {
+            m_RB.velocity = Vector2.zero;
+            m_AI.SetAnimatorTrigger(AIController.AnimationTriggers.Damage);
+        }
+
     }
 
     private void Die()

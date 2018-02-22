@@ -36,6 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4403857143829706}
   - component: {fileID: 114094554767628142}
+  - component: {fileID: 114083869774347122}
   - component: {fileID: 114687715684600182}
   - component: {fileID: 114768173195089358}
   - component: {fileID: 114856530159541182}
@@ -8283,7 +8284,7 @@ Animator:
   m_GameObject: {fileID: 1394054459224958}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d358c35d665bd39458ca0ad52ae82032, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7579dcc7c58385e4480e9dc0d8206cfe, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -8300,7 +8301,7 @@ Animator:
   m_GameObject: {fileID: 1425168467264708}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e9646068692aaac40a28dcd1a2b6c169, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5e3d632df73e1294ebb543e4e87437ac, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 1
   m_ApplyRootMotion: 1
@@ -8308,6 +8309,23 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114083869774347122
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1393414929310278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f52de0d4cef28c947bf7d6e027ea65db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MaxHealth: 1
+  m_CurHealth: 0
+  m_PC: {fileID: 0}
+  m_RB: {fileID: 0}
+  m_AI: {fileID: 0}
+  m_BodyCollider: {fileID: 0}
 --- !u!114 &114094554767628142
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -10,11 +10,9 @@ namespace FeatherSword.Actions
         [SerializeField]
         private Rigidbody2D m_CachedRigidbody;
 
-        private bool m_ActivateBlock = false;
+
         private bool m_IsBlocking = false;
-        private float m_BlockTimer = 0f;
-        [SerializeField]
-        private float m_BlockCd = 2f;
+        
         
 
         private void Start()
@@ -24,7 +22,6 @@ namespace FeatherSword.Actions
             m_PC = GetComponent<PlayerController>();
             if (m_PC)
                 m_PC.RegisterUpdateAction(this);
-            m_BlockTimer = m_BlockCd;
         }
 
         public override void DoAction(float data, bool status)
@@ -49,17 +46,13 @@ namespace FeatherSword.Actions
         private void ToBlockPosition(Rigidbody2D RB)
         {
             m_PC.SetAnimatorTrigger(PlayerController.AnimationTriggers.StartBlock);
-            m_IsBlocking = true;
-            m_ActivateBlock = false;
-            
-            
+            m_IsBlocking = true;          
         }
+
         private void ToStopBlockingPos()
         {
             m_PC.SetAnimatorTrigger(PlayerController.AnimationTriggers.EndBlock);
             m_IsBlocking = false;
-            m_BlockTimer = m_BlockCd;
-            m_ActivateBlock = false;
         }
         public void ObjectBlocked()
         {

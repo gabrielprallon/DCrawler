@@ -103,13 +103,6 @@ namespace FeatherSword.Actions {
                         m_PC.SetAnimatorTrigger(PlayerController.AnimationTriggers.Idle);
                 }
             }
-            else
-            {
-                RB.velocity = Vector2.zero;
-            }
-
-            
-           
         }
         
      

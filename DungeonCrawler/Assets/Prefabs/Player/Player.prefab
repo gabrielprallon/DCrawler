@@ -8364,7 +8364,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ActionID: 4
   m_CachedRigidbody: {fileID: 0}
-  m_BlockCd: 5
 --- !u!114 &114592639307951756
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8565,9 +8564,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ActionID: 1
   m_CachedRigidbody: {fileID: 0}
-  m_JumpSpeed: 10
-  m_Adjustment: 0.2
-  m_JumpPrepTime: 0.2
+  m_JumpSpeed: 8
+  m_JumpPrepTime: 0.01
 --- !u!114 &114856530159541182
 MonoBehaviour:
   m_ObjectHideFlags: 1

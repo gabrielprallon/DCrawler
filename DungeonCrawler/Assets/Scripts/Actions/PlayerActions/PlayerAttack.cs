@@ -16,7 +16,6 @@ namespace FeatherSword.Actions {
         private int m_ComboCount = 0;
 
         private bool m_JustAttack = false;
-        private bool m_RestartAttack = false;
         private bool m_AnimationFinished = false;
         private bool m_Anim3Time;
         

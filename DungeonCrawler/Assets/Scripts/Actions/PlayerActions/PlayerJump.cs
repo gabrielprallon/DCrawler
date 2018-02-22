@@ -9,13 +9,7 @@ namespace FeatherSword.Actions {
         private Rigidbody2D m_CachedRigidbody;
         [SerializeField]
         private float m_JumpSpeed = 10f;
-        private bool m_IsGrounded = true;
         private PlayerController m_PC;
-
-        [SerializeField]
-        private float m_Adjustment=0.2f;
-
-        private bool m_StartJump =false;
 
         [SerializeField]
         private float m_JumpPrepTime = 0.2f;
@@ -57,12 +51,8 @@ namespace FeatherSword.Actions {
         {
             if (m_PC.IsGrounded && status)
             {
-
-                m_StartJump = true;
                 m_PC.SetAnimatorTrigger(PlayerController.AnimationTriggers.StartJump);
                 StartCoroutine(StartJump(RB));
-
-
             }
 
         }

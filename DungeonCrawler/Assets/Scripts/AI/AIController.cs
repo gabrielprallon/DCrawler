@@ -12,7 +12,8 @@ public class AIController : MonoBehaviour
         public string Value;
 
         public static AnimationTriggers Damage { get { return new AnimationTriggers("Damage"); } }
-
+        public static AnimationTriggers Attack { get { return new AnimationTriggers("Attack"); } }
+        
 
     }
 
@@ -26,6 +27,17 @@ public class AIController : MonoBehaviour
 
     public Rigidbody2D m_RB;
 
+    [Header("Player detection")]
+ 
+    public AIPlayerDetection m_PDSys;
+    [SerializeField]
+    private float m_RayMoveRange = 20f;
+    [SerializeField]
+    private float m_RayMeleeAttackRange = 3f;
+    [SerializeField]
+    private float m_RayRangedAttackRange = 6f;
+
+    private bool[] m_ActivateAction = new bool[7];
     public int m_EnemyID = 0;
 
     [Header("Ground detection")]
@@ -43,6 +55,7 @@ public class AIController : MonoBehaviour
     [SerializeField]
     private Collider2D m_GroundStableCollider;
 
+    
     // simple events
     public delegate void OnHitGroundEvent();
     public delegate void OnLeaveGroundEvent();
@@ -60,27 +73,34 @@ public class AIController : MonoBehaviour
     {
         if (!m_RB)
             m_RB = GetComponent<Rigidbody2D>();
+        if (!m_PDSys)
+            m_PDSys = GetComponent<AIPlayerDetection>();
 
     }
     private void Update()
     {
-
+        m_ActivateAction[4] = m_PDSys.PlayerDetection2(m_RayMeleeAttackRange);
+        //m_ActivateAction[5] = m_PDSys.PlayerDetection(transform.localScale, m_RayRangedAttackRange);
         /*
          * Action ID 0 = Horizontal Movement
          * Action ID 1 = Vertical Movement
          * Action ID 2 = Jump
          * Action ID 3 = Dodge/Dash
-         * Action ID 4 = Attack
-         * Action ID 5 = Block
+         * Action ID 4 = Mellee Attack
+         * Action ID 5 = Ranged Attack
+         * Action ID 6 = Block
         */
+
         CheckForGround();
         foreach (ActionBase action in m_UpdateActions)
         {
-            action.CallAction(0);
+            action.CallAction(0, m_ActivateAction[0]);
             action.CallAction(1);
             action.CallAction(2);
             action.CallAction(3);
-            action.CallAction(4);
+            action.CallAction(4, m_ActivateAction[4]);
+            action.CallAction(5);
+            action.CallAction(6);
         }
     }
     private void FixedUpdate()
@@ -92,16 +112,19 @@ public class AIController : MonoBehaviour
          * Action ID 2 = Jump
          * Action ID 3 = Dodge/Dash
          * Action ID 4 = Attack
-         * Action ID 5 = Block
+         * Action ID 5 = Ranged Attack
+         * Action ID 6 = Block
         */
+        m_ActivateAction[0] = m_PDSys.PlayerDetection2(m_RayMoveRange);
         foreach (ActionBase action in m_FixedUpdateActions)
         {
-            action.CallAction(0);
+            action.CallAction(0, m_ActivateAction[0]);
             action.CallAction(1);
             action.CallAction(2);
             action.CallAction(3);
-            action.CallAction(4);
+            action.CallAction(4, m_ActivateAction[4]);
             action.CallAction(5);
+            action.CallAction(6);
         }
     }
     public void RegisterUpdateAction(ActionBase action)
@@ -191,6 +214,8 @@ public class AIController : MonoBehaviour
             Gizmos.DrawLine(transform.position + m_GroundDetectionOffset, transform.position + m_GroundDetectionOffset + Vector3.down * m_GroundCheckDist);
         }
     }
+
+
 
 
 }

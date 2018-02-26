@@ -14,23 +14,21 @@ public class HealthSystem : MonoBehaviour {
     [SerializeField]
     private Rigidbody2D m_RB;
     [SerializeField]
-    private AIController m_AI;
+    private AIController m_AIC;
     [SerializeField]
     private PolygonCollider2D m_BodyCollider;
 	// Use this for initialization
 	void Start () {
 
         m_CurHealth = m_MaxHealth;
-        if(gameObject.tag == "Body")
-            m_PC = GetComponent<PlayerController>();
-        if(gameObject.tag == "Enemy")
-            m_AI = GetComponent<AIController>();
+        m_PC = GetComponent<PlayerController>();
+        m_AIC = GetComponent<AIController>();
         m_RB = GetComponent<Rigidbody2D>();
 
     }
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	private void Update () {
 		if(m_CurHealth <= 0)
         {
             Die();
@@ -40,29 +38,34 @@ public class HealthSystem : MonoBehaviour {
     public void Damage(float dmg)
     {
         m_CurHealth -= dmg;
-        if(gameObject.tag == "Body")
+        if(m_PC)
         {
             m_RB.velocity = Vector2.zero;
-            m_PC.SetAnimatorTrigger(PlayerController.AnimationTriggers.Damage);
+            if(!IsDying())
+                m_PC.SetAnimatorTrigger(PlayerController.AnimationTriggers.Damage);
         }
-        if(gameObject.tag == "Enemy")
+        if(m_AIC)
         {
             m_RB.velocity = Vector2.zero;
-            m_AI.SetAnimatorTrigger(AIController.AnimationTriggers.Damage);
+            m_AIC.SetAnimatorTrigger(AIController.AnimationTriggers.Damage);
         }
 
     }
 
     private void Die()
     {
-        Destroy(gameObject);
-        if(gameObject.tag == "Body")
+        if(m_PC)
         {
-            
+            if(!IsDying())
+                m_PC.SetAnimatorTrigger(PlayerController.AnimationTriggers.Die);    
         }
     }
+    private bool IsDying()
+    {
+        return m_PC.IsInAnimationTag("Die");
+    }
 
-   
+
 
 
 }

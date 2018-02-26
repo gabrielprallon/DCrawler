@@ -28,7 +28,8 @@ namespace FeatherSword.Actions.AIActions
                 || m_AIC.IsInAnimationTag("Block")
                 || m_AIC.IsInAnimationTag("Jump")
                 || m_AIC.IsInAnimationTag("Dodge")
-                || m_AIC.IsInAnimationTag("Damage");
+                || m_AIC.IsInAnimationTag("Damage")
+                || m_AIC.IsInAnimationTag("Die");
         }
         public void AIMeleeAttack(bool status)
         {
@@ -36,9 +37,6 @@ namespace FeatherSword.Actions.AIActions
             {
                 if (status)
                 {
-                    m_AIC.m_RB.velocity = Vector2.zero;
-                    //m_Anim.SetTrigger("Attack");
-
                     m_AIC.SetAnimatorTrigger(AIController.AnimationTriggers.Attack);
                 }
             }

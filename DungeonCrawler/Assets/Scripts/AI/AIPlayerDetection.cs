@@ -16,6 +16,8 @@ public class AIPlayerDetection : MonoBehaviour {
     public bool PlayerDetection(Vector2 direction, float rayRange)
     {
         RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, direction, rayRange);
+        if (!m_Player)
+            return false;
         if (hit.collider.CompareTag("Body")
             ||hit.collider.CompareTag("Player")
             ||hit.collider.CompareTag("Weapon"))

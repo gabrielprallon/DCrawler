@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyBaseWeapon : MonoBehaviour {
     [SerializeField]
-    private float m_WeaponDamage = 1f;
+    private float m_WeaponDamage = 0f;
 	// Use this for initialization
 	void Start () {
 		

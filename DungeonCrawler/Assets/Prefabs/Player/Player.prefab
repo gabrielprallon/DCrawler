@@ -14600,9 +14600,9 @@ MonoBehaviour:
   m_MaxHealth: 1
   m_CurHealth: 0
   m_PC: {fileID: 0}
-  m_RB: {fileID: 0}
-  m_AI: {fileID: 0}
-  m_BodyCollider: {fileID: 0}
+  m_RB: {fileID: 50243954863503284}
+  m_AIC: {fileID: 0}
+  m_BodyCollider: {fileID: 60752326529489096}
 --- !u!114 &114094554767628142
 MonoBehaviour:
   m_ObjectHideFlags: 1

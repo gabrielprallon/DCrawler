@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour {
         public static AnimationTriggers StartRun    { get { return new AnimationTriggers("Run"); } }
         public static AnimationTriggers StartJump   { get { return new AnimationTriggers("Jumping"); } }
         public static AnimationTriggers EndJump     { get { return new AnimationTriggers("Landing"); } }
+        public static AnimationTriggers Die         { get { return new AnimationTriggers("Die"); } }
     }
 
     [SerializeField]

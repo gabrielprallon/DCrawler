@@ -13,7 +13,8 @@ public class AIController : MonoBehaviour
 
         public static AnimationTriggers Damage { get { return new AnimationTriggers("Damage"); } }
         public static AnimationTriggers Attack { get { return new AnimationTriggers("Attack"); } }
-        
+        public static AnimationTriggers Die { get { return new AnimationTriggers("Die"); } }
+
 
     }
 
@@ -28,8 +29,8 @@ public class AIController : MonoBehaviour
     public Rigidbody2D m_RB;
 
     [Header("Player detection")]
- 
     public AIPlayerDetection m_PDSys;
+
     [SerializeField]
     private float m_RayMoveRange = 20f;
     [SerializeField]
@@ -86,7 +87,7 @@ public class AIController : MonoBehaviour
          * Action ID 1 = Vertical Movement
          * Action ID 2 = Jump
          * Action ID 3 = Dodge/Dash
-         * Action ID 4 = Mellee Attack
+         * Action ID 4 = Melee Attack
          * Action ID 5 = Ranged Attack
          * Action ID 6 = Block
         */
@@ -111,7 +112,7 @@ public class AIController : MonoBehaviour
          * Action ID 1 = Vertical Movement
          * Action ID 2 = Jump
          * Action ID 3 = Dodge/Dash
-         * Action ID 4 = Attack
+         * Action ID 4 = Melee Attack
          * Action ID 5 = Ranged Attack
          * Action ID 6 = Block
         */

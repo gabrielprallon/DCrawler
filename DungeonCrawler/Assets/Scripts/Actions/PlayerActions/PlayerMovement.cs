@@ -58,7 +58,8 @@ namespace FeatherSword.Actions {
                 || m_PC.IsInAnimationTag("Block") 
                 || m_PC.IsInAnimationTag("Jump") 
                 || m_PC.IsInAnimationTag("Dodge") 
-                || m_PC.IsInAnimationTag("Damage");
+                || m_PC.IsInAnimationTag("Damage")
+                || m_PC.IsInAnimationTag("Die");
         }
 
         public void Move(Rigidbody2D RB, float moveSpeed, float horizontalDirection) {

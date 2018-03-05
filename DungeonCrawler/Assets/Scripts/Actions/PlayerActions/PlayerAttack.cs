@@ -33,15 +33,20 @@ namespace FeatherSword.Actions {
             Attack(status);
         }
         
-        private bool IsAnimationAttack()
+        private bool IsDoingSomething()
         {
-            return m_PC.IsInAnimationTag("Attack");
+            return m_PC.IsInAnimationTag("Attack")
+                || m_PC.IsInAnimationTag("Block")
+                || m_PC.IsInAnimationTag("Jump")
+                || m_PC.IsInAnimationTag("Dodge")
+                || m_PC.IsInAnimationTag("Damage")
+                || m_PC.IsInAnimationTag("Death");
         }
 
         public void Attack(bool status)
         {
             ResetTriggers();
-            if (status && !IsAnimationAttack())
+            if (status && !IsDoingSomething())
             {
                 if ((
                     !m_IsAttacking 
@@ -66,7 +71,7 @@ namespace FeatherSword.Actions {
 
         private void Update()
         {
-            if (m_IsAttacking && !IsAnimationAttack() && !m_AnimationFinished)
+            if (m_IsAttacking && !IsDoingSomething() && !m_AnimationFinished)
             {
                 m_AnimationFinished = true;
                 m_AttackTimer = m_ComboTimer;

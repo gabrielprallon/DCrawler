@@ -35,6 +35,7 @@ namespace FeatherSword.Actions {
         private bool facingRight = true;
         private Vector2 m_MoveDirection = Vector2.zero;
         private PlayerController m_PC;
+        private DoingSomeAction m_IDS;
         private void Start()
         {
             if (!m_CachedRigidbody)
@@ -42,6 +43,8 @@ namespace FeatherSword.Actions {
             m_PC = GetComponent<PlayerController>();
             if (m_PC)
                 m_PC.RegisterFixedUpdateAction(this);
+            if (!m_IDS)
+                m_IDS = gameObject.GetComponent<DoingSomeAction>();
         }
 
         public override void DoAction(float data, bool status)
@@ -55,11 +58,11 @@ namespace FeatherSword.Actions {
         private bool IsDoingSomething()
         {
             return m_PC.IsInAnimationTag("Attack") 
-                || m_PC.IsInAnimationTag("Block") 
-                || m_PC.IsInAnimationTag("Jump") 
-                || m_PC.IsInAnimationTag("Dodge") 
-                || m_PC.IsInAnimationTag("Damage")
-                || m_PC.IsInAnimationTag("Die");
+                   || m_PC.IsInAnimationTag("Block") 
+                   || m_PC.IsInAnimationTag("Jump") 
+                   || m_PC.IsInAnimationTag("Dodge") 
+                   || m_PC.IsInAnimationTag("Damage")
+                   || m_PC.IsInAnimationTag("Death");
         }
 
         public void Move(Rigidbody2D RB, float moveSpeed, float horizontalDirection) {

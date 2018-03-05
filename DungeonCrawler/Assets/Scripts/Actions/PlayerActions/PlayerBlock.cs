@@ -24,6 +24,7 @@ namespace FeatherSword.Actions
                 m_PC.RegisterUpdateAction(this);
         }
 
+
         public override void DoAction(float data, bool status)
         {
             base.DoAction(data, status);

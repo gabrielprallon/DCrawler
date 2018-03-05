@@ -23,8 +23,7 @@ namespace FeatherSword.Actions.AIActions
         }
         private bool IsDoingSomething()
         {
-            return m_AIC.IsInAnimationTag("MeleeAttack")
-                || m_AIC.IsInAnimationTag("RangedAttack")
+            return m_AIC.IsInAnimationTag("Attack")
                 || m_AIC.IsInAnimationTag("Block")
                 || m_AIC.IsInAnimationTag("Jump")
                 || m_AIC.IsInAnimationTag("Dodge")

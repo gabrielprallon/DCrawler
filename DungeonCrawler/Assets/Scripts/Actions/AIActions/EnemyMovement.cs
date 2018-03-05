@@ -10,15 +10,9 @@ namespace FeatherSword.Actions.AIActions
         private AIController m_AIC;
         [SerializeField]
         private float m_MoveSpeed = 5f;
-
-        private bool facingRight = false;
-        private Vector2 m_MoveDirection;
         [SerializeField]
-        private float m_RayRange = 20f;
-
-        private bool m_PlayerHit;
-
-        private Transform m_Player;
+        private bool m_FacingRight = false;
+        private Vector2 m_MoveDirection;
 
 
         // Use this for initialization
@@ -39,12 +33,12 @@ namespace FeatherSword.Actions.AIActions
 
         private bool IsDoingSomething()
         {
-            return m_AIC.IsInAnimationTag("MeleeAttack")
-                || m_AIC.IsInAnimationTag("RangedAttack")
+            return m_AIC.IsInAnimationTag("Attack")
                 || m_AIC.IsInAnimationTag("Block")
                 || m_AIC.IsInAnimationTag("Jump")
                 || m_AIC.IsInAnimationTag("Dodge")
-                || m_AIC.IsInAnimationTag("Damage");
+                || m_AIC.IsInAnimationTag("Damage")
+                || m_AIC.IsInAnimationTag("Death");
         }
         public void AIMove(bool status)
         {
@@ -55,17 +49,35 @@ namespace FeatherSword.Actions.AIActions
                 {
                     m_AIC.m_RB.velocity = m_AIC.m_PDSys.m_Dir * m_MoveSpeed;
                 }
-                if (m_AIC.m_PDSys.m_Dir.x < 0f)
+                if (!m_FacingRight)
                 {
-                    Vector3 theScale = transform.localScale;
-                    theScale.x = 1;
-                    transform.localScale = theScale;
+                    if (m_AIC.m_PDSys.m_Dir.x < 0f)
+                    {
+                        Vector3 theScale = transform.localScale;
+                        theScale.x = 1;
+                        transform.localScale = theScale;
+                    }
+                    else
+                    {
+                        Vector3 theScale = transform.localScale;
+                        theScale.x = -1;
+                        transform.localScale = theScale;
+                    }
                 }
                 else
                 {
-                    Vector3 theScale = transform.localScale;
-                    theScale.x = -1;
-                    transform.localScale = theScale;
+                    if (m_AIC.m_PDSys.m_Dir.x < 0f)
+                    {
+                        Vector3 theScale = transform.localScale;
+                        theScale.x = -1;
+                        transform.localScale = theScale;
+                    }
+                    else
+                    {
+                        Vector3 theScale = transform.localScale;
+                        theScale.x = 1;
+                        transform.localScale = theScale;
+                    }
                 }
             }
         }

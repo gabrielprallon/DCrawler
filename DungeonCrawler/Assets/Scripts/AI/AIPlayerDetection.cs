@@ -34,9 +34,13 @@ public class AIPlayerDetection : MonoBehaviour {
         if (distanceToTarget <= range)
         {
             if (targetDir.x < 0)
+            {
                 m_Dir = new Vector2(-1, 0);
+            }
             else
+            {
                 m_Dir = new Vector2(1, 0);
+            }
             return true;
         }else
             return false;

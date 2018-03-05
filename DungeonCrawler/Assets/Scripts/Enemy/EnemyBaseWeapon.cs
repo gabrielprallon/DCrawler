@@ -17,9 +17,18 @@ public class EnemyBaseWeapon : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D other)
     {
         HealthSystem Hero = other.gameObject.GetComponent<HealthSystem>();
-        if (Hero)
+        if (!IsNotGettingDamage(other.gameObject))
         {
-            Hero.Damage(m_WeaponDamage);
+            if (Hero)
+            {
+                Hero.Damage(m_WeaponDamage);
+            }
         }
+    }
+    private bool IsNotGettingDamage(GameObject hero)
+    {
+        PlayerController pc = hero.GetComponent<PlayerController>();
+        return pc.IsInAnimationTag("Damage")
+            ||pc.IsInAnimationTag("Death");
     }
 }

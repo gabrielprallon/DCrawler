@@ -17,6 +17,8 @@ public class HealthSystem : MonoBehaviour {
     private AIController m_AIC;
     [SerializeField]
     private PolygonCollider2D m_BodyCollider;
+    [SerializeField]
+    private PolygonCollider2D m_CritCollider;
 	// Use this for initialization
 	void Start () {
 
@@ -57,7 +59,7 @@ public class HealthSystem : MonoBehaviour {
         if(m_PC)
         {
             if(!IsDying())
-                m_PC.SetAnimatorTrigger(PlayerController.AnimationTriggers.Die);    
+                m_PC.SetAnimatorTrigger(PlayerController.AnimationTriggers.Death);    
         }
     }
     private bool IsDying()

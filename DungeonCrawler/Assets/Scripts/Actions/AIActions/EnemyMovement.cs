@@ -12,8 +12,16 @@ namespace FeatherSword.Actions.AIActions
         private float m_MoveSpeed = 5f;
         [SerializeField]
         private bool m_FacingRight = false;
-        private Vector2 m_MoveDirection;
+        [SerializeField]
+        private bool m_MoveOnPath;
+        [SerializeField]
+        private GameObject m_PathWay;
+        [SerializeField]
+        private bool m_PathIsRandom = false;
+        [SerializeField]
+        private List<Transform> m_Path = new List<Transform>();
 
+        private int m_PathCounter=0;
 
         // Use this for initialization
         private void Start()
@@ -22,7 +30,6 @@ namespace FeatherSword.Actions.AIActions
                 m_AIC = GetComponent<AIController>();
             if (m_AIC)
                 m_AIC.RegisterFixedUpdateAction(this);
-            m_MoveDirection = new Vector2(-1f * Mathf.Sign(transform.localScale.x), 0f);
         }
         public override void DoAction(float data, bool status)
         {
@@ -47,37 +54,102 @@ namespace FeatherSword.Actions.AIActions
             {
                 if (status)
                 {
-                    m_AIC.m_RB.velocity = m_AIC.m_PDSys.m_Dir * m_MoveSpeed;
-                }
-                if (!m_FacingRight)
-                {
-                    if (m_AIC.m_PDSys.m_Dir.x < 0f)
-                    {
-                        Vector3 theScale = transform.localScale;
-                        theScale.x = 1;
-                        transform.localScale = theScale;
-                    }
+                    if(!m_MoveOnPath)
+                        MoveToPlayer();
                     else
                     {
-                        Vector3 theScale = transform.localScale;
-                        theScale.x = -1;
-                        transform.localScale = theScale;
+                        if (m_PathIsRandom)
+                        {
+                            m_PathCounter = Random.Range(0, m_Path.Count);
+                        }
+                        else
+                        {
+                            m_PathCounter++;
+                            if (m_PathCounter >= m_Path.Count)
+                            {
+                                m_PathCounter = 0;
+                            }
+                        }
+                        MoveOnPath(m_PathCounter);
                     }
+                }
+                DirectionAdjustment();
+            }
+        }
+
+        private void MoveToPlayer()
+        {
+            m_AIC.m_RB.velocity = m_AIC.m_PDSys.m_Dir * m_MoveSpeed;
+            
+        }
+
+        private void MoveOnPath(int nextPoint)
+        {
+            Vector3 dir = MoveDirOnPath(nextPoint);
+            m_AIC.m_RB.velocity = dir * m_MoveSpeed;
+        }
+        private Vector3 MoveDirOnPath(int nextPoint)
+        {
+            Vector3 dir = Vector3.zero;
+            Vector3 holder = transform.position - m_Path[nextPoint].position;
+            if (holder.x > 0)
+            {
+                dir.x = -1;
+            }
+            if (holder.x < 0)
+            {
+                dir.x = 1;
+            }
+            if (holder.x == 0)
+            {
+                dir.x = 0;
+            }
+            if (holder.y > 0)
+            {
+                dir.y = -1;
+            }
+            if (holder.y < 0)
+            {
+                dir.y = 1;
+            }
+            if (holder.y == 0)
+            {
+                dir.y = 0;
+            }
+            dir.z = 0;
+            return dir;
+        }
+
+        private void DirectionAdjustment()
+        {
+            if (!m_FacingRight)
+            {
+                if (m_AIC.m_PDSys.m_Dir.x < 0f)
+                {
+                    Vector3 theScale = transform.localScale;
+                    theScale.x = 1;
+                    transform.localScale = theScale;
                 }
                 else
                 {
-                    if (m_AIC.m_PDSys.m_Dir.x < 0f)
-                    {
-                        Vector3 theScale = transform.localScale;
-                        theScale.x = -1;
-                        transform.localScale = theScale;
-                    }
-                    else
-                    {
-                        Vector3 theScale = transform.localScale;
-                        theScale.x = 1;
-                        transform.localScale = theScale;
-                    }
+                    Vector3 theScale = transform.localScale;
+                    theScale.x = -1;
+                    transform.localScale = theScale;
+                }
+            }
+            else
+            {
+                if (m_AIC.m_PDSys.m_Dir.x < 0f)
+                {
+                    Vector3 theScale = transform.localScale;
+                    theScale.x = -1;
+                    transform.localScale = theScale;
+                }
+                else
+                {
+                    Vector3 theScale = transform.localScale;
+                    theScale.x = 1;
+                    transform.localScale = theScale;
                 }
             }
         }

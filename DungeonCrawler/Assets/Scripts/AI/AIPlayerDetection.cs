@@ -45,4 +45,9 @@ public class AIPlayerDetection : MonoBehaviour {
         }else
             return false;
     }
+    public Vector3 PlayerDistanceOnAxis()
+    {
+        Vector3 distance = m_Player.position - transform.position;
+        return distance;
+    }
 }

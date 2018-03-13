@@ -6,7 +6,7 @@ namespace FeatherSword.Actions.AIActions
     public class EnemyMeleeAttack : ActionBase
     {
         private AIController m_AIC;
-        private Animator m_Anim;
+
         // Use this for initialization
         private void Start()
         {
@@ -14,7 +14,7 @@ namespace FeatherSword.Actions.AIActions
                 m_AIC = GetComponent<AIController>();
             if (m_AIC)
                 m_AIC.RegisterUpdateAction(this);
-            m_Anim = GetComponentInChildren<Animator>();
+
         }
         public override void DoAction(float data, bool status)
         {

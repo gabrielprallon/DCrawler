@@ -15,13 +15,14 @@ namespace FeatherSword.AI
         // Use this for initialization
         void Start()
         {
+          
 
         }
 
         // Update is called once per frame
-        void FixedUpdate()
+        void Update()
         {
-            m_ThrowTime += Time.fixedDeltaTime;
+            m_ThrowTime += Time.deltaTime;
             if (m_ThrowTime >= m_throwCD)
             {
                 m_CanThrow = true;

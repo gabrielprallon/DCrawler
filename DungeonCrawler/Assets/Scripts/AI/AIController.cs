@@ -14,6 +14,9 @@ using FeatherSword.Actions;
 
             public static AnimationTriggers Damage { get { return new AnimationTriggers("Damage"); } }
             public static AnimationTriggers Attack { get { return new AnimationTriggers("Attack"); } }
+            public static AnimationTriggers RangedAttack { get { return new AnimationTriggers("RangedAttack"); } }
+            public static AnimationTriggers RangedAttack2 { get { return new AnimationTriggers("RangedAttack2"); } }
+            public static AnimationTriggers RangedAttack3 { get { return new AnimationTriggers("RangedAttack3"); } }
             public static AnimationTriggers Die { get { return new AnimationTriggers("Death"); } }
 
 

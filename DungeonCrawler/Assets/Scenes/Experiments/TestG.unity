@@ -1703,15 +1703,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1548699331898706, guid: 127f1caa3d349c8458260bbd245d8aee, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114233782934228892, guid: 127f1caa3d349c8458260bbd245d8aee,
-        type: 2}
-      propertyPath: m_RayMeleeAttackRange
-      value: 1.8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 127f1caa3d349c8458260bbd245d8aee, type: 2}
   m_IsPrefabParent: 0

@@ -1465,7 +1465,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ActionID: 0
   m_AIC: {fileID: 0}
-  m_MoveSpeed: 5
+  m_MoveSpeed: 1
   m_FacingRight: 0
 --- !u!114 &114233782934228892
 MonoBehaviour:
@@ -1486,7 +1486,8 @@ MonoBehaviour:
   m_PDSys: {fileID: 0}
   m_Player: {fileID: 0}
   m_RayMoveRange: 20
-  m_RayMeleeAttackRange: 1.2
+  m_ShowRayMeleeDebug: 1
+  m_RayMeleeAttackRange: 1.4
   m_RayRangedAttackRange: 6
   m_EnemyID: 0
   m_ShowGroundDetectionDebug: 0
@@ -1574,7 +1575,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ActionID: 4
-  m_HoldAttackTime: 0
+  m_HoldAttackTime: 1
 --- !u!114 &114488101918858488
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5787,7 +5788,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_WeaponDamage: 0
-  m_PushForce: {x: 2, y: 20}
+  m_PushForce: {x: 7.5, y: 4}
 --- !u!114 &114850014412405096
 MonoBehaviour:
   m_ObjectHideFlags: 1

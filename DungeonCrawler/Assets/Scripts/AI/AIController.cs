@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FeatherSword.Actions;
 
-
+namespace FeatherSword.AI {
     public class AIController : MonoBehaviour
     {
         public class AnimationTriggers
@@ -40,6 +40,8 @@ using FeatherSword.Actions;
 
         [SerializeField]
         private float m_RayMoveRange = 20f;
+        [SerializeField]
+        private bool m_ShowRayMeleeDebug = true;
         [SerializeField]
         private float m_RayMeleeAttackRange = 3f;
         [SerializeField]
@@ -129,7 +131,7 @@ using FeatherSword.Actions;
              * Action ID 5 = Ranged Attack
              * Action ID 6 = Block
             */
-            m_ActivateAction[0] = m_PDSys.PlayerDetection2(m_RayMoveRange);
+            m_ActivateAction[0] = m_PDSys.PlayerDetection3(m_RayMoveRange);
             if (!PlayerGettingDamageOrDead())
             {
                 foreach (ActionBase action in m_FixedUpdateActions)
@@ -185,7 +187,7 @@ using FeatherSword.Actions;
             foreach (Animator anim in m_Animator)
                 anim.SetFloat(parameter, value);
         }
-        
+
         protected bool PlayerGettingDamageOrDead()
         {
             return m_Player.IsInAnimationTag("Damage")
@@ -236,10 +238,16 @@ using FeatherSword.Actions;
                 Gizmos.DrawWireSphere(transform.position + m_GroundDetectionOffset + Vector3.down * m_GroundCheckDist, m_CircleCastRadius);
                 Gizmos.DrawLine(transform.position + m_GroundDetectionOffset, transform.position + m_GroundDetectionOffset + Vector3.down * m_GroundCheckDist);
             }
+            if (m_ShowRayMeleeDebug)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawWireSphere(transform.position - transform.right * m_RayMeleeAttackRange, 0.1f);
+                Gizmos.DrawLine(transform.position, transform.position - transform.right * m_RayMeleeAttackRange);
+            }
         }
 
 
-
+    }
 
     }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using FeatherSword.AI;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 namespace FeatherSword.Actions.AIActions
@@ -33,9 +34,9 @@ namespace FeatherSword.Actions.AIActions
         }
         public void AIMeleeAttack(bool status)
         {
-            if (!IsDoingSomething())
+            if (status)
             {
-                if (status)
+                if (!IsDoingSomething())
                 {
                     m_AIC.SetAnimatorTrigger(AIController.AnimationTriggers.Attack);
                     StartCoroutine(WaitToAttack());

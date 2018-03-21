@@ -14603,6 +14603,7 @@ MonoBehaviour:
   m_RB: {fileID: 50243954863503284}
   m_AIC: {fileID: 0}
   m_BodyCollider: {fileID: 60752326529489096}
+  m_CritCollider: {fileID: 0}
 --- !u!114 &114094554767628142
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -14627,6 +14628,7 @@ MonoBehaviour:
   m_CircleCastRadius: 0.25
   m_GroundDetectionOffset: {x: 0, y: -0.3, z: 0}
   m_GroundStableCollider: {fileID: 61386109595114668}
+  m_PlayerCenterOffset: {x: 0, y: -0.56}
   m_PlayerID: 0
   WantsToRun: 0
 --- !u!114 &114268483507065634
@@ -37725,6 +37727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_WeaponDamage: 1
+  m_CriticalDamage: 2
 --- !u!114 &114349120640862966
 MonoBehaviour:
   m_ObjectHideFlags: 1

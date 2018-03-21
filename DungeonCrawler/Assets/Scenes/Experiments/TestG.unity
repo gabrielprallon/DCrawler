@@ -316,6 +316,7 @@ MonoBehaviour:
   m_PDSys: {fileID: 0}
   m_Player: {fileID: 0}
   m_RayMoveRange: 20
+  m_ShowRayMeleeDebug: 1
   m_RayMeleeAttackRange: 3
   m_RayRangedAttackRange: 6
   m_EnemyID: 0
@@ -893,7 +894,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &896354088
 Transform:
   m_ObjectHideFlags: 0
@@ -1702,20 +1703,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114122456804425288, guid: 127f1caa3d349c8458260bbd245d8aee,
-        type: 2}
-      propertyPath: m_MoveSpeed
+    - target: {fileID: 1548699331898706, guid: 127f1caa3d349c8458260bbd245d8aee, type: 2}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114122456804425288, guid: 127f1caa3d349c8458260bbd245d8aee,
+    - target: {fileID: 114233782934228892, guid: 127f1caa3d349c8458260bbd245d8aee,
         type: 2}
-      propertyPath: m_FacingRight
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114321350839935962, guid: 127f1caa3d349c8458260bbd245d8aee,
-        type: 2}
-      propertyPath: m_HoldAttackTime
-      value: 5
+      propertyPath: m_RayMeleeAttackRange
+      value: 1.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 127f1caa3d349c8458260bbd245d8aee, type: 2}

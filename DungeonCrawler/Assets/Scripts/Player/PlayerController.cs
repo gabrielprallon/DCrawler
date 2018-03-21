@@ -50,6 +50,9 @@ using FeatherSword.Input;
         private Vector3 m_GroundDetectionOffset;
         [SerializeField]
         private Collider2D m_GroundStableCollider;
+        [Header("PlayerDetection")]
+        [SerializeField]
+        private Vector2 m_PlayerCenterOffset;
 
         private bool[] buttonInput = new bool[5];
         public int m_PlayerID = 0;
@@ -65,6 +68,19 @@ using FeatherSword.Input;
         public bool IsGrounded
         {
             get { return m_IsGrounded; }
+        }
+
+        public Vector2 PlayerCenterOffset
+        {
+            get
+            {
+                return m_PlayerCenterOffset;
+            }
+
+            set
+            {
+                m_PlayerCenterOffset = value;
+            }
         }
 
         public bool WantsToRun = false;

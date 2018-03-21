@@ -5,6 +5,9 @@ using UnityEngine;
 public class EnemyBaseWeapon : MonoBehaviour {
     [SerializeField]
     private float m_WeaponDamage = 0f;
+    [SerializeField]
+    private Vector2 m_PushForce = new Vector2(2f,20f);
+
 	// Use this for initialization
 	void Start () {
 		
@@ -16,19 +19,22 @@ public class EnemyBaseWeapon : MonoBehaviour {
 	}
     private void OnCollisionEnter2D(Collision2D other)
     {
-        HealthSystem Hero = other.gameObject.GetComponent<HealthSystem>();
-        if (!IsNotGettingDamage(other.gameObject))
+        HealthSystem hero = other.gameObject.GetComponent<HealthSystem>();
+        
+        if (hero)
         {
-            if (Hero)
+            PlayerController heroPc = hero.gameObject.GetComponent<PlayerController>();
+            Rigidbody2D heroRB = hero.gameObject.GetComponent<Rigidbody2D>();
+            if (!IsNotGettingDamage(heroPc))
             {
-                Hero.Damage(m_WeaponDamage);
+                hero.Damage(m_WeaponDamage);
+                heroRB.AddForce(new Vector2(-hero.transform.localScale.x*m_PushForce.x, m_PushForce.y), ForceMode2D.Force);
             }
         }
     }
-    private bool IsNotGettingDamage(GameObject hero)
+    private bool IsNotGettingDamage(PlayerController heroPc)
     {
-        PlayerController pc = hero.GetComponent<PlayerController>();
-        return pc.IsInAnimationTag("Damage")
-            ||pc.IsInAnimationTag("Death");
+        return heroPc.IsInAnimationTag("Damage")
+            ||heroPc.IsInAnimationTag("Death");
     }
 }

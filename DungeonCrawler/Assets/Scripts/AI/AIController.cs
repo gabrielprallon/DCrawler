@@ -14,6 +14,7 @@ using FeatherSword.Actions;
 
             public static AnimationTriggers Damage { get { return new AnimationTriggers("Damage"); } }
             public static AnimationTriggers Attack { get { return new AnimationTriggers("Attack"); } }
+            public static AnimationTriggers DoAttack { get { return new AnimationTriggers("DoAttack"); } }
             public static AnimationTriggers RangedAttack { get { return new AnimationTriggers("RangedAttack"); } }
             public static AnimationTriggers RangedAttack2 { get { return new AnimationTriggers("RangedAttack2"); } }
             public static AnimationTriggers RangedAttack3 { get { return new AnimationTriggers("RangedAttack3"); } }
@@ -34,6 +35,8 @@ using FeatherSword.Actions;
 
         [Header("Player detection")]
         public AIPlayerDetection m_PDSys;
+        [SerializeField]
+        private PlayerController m_Player;
 
         [SerializeField]
         private float m_RayMoveRange = 20f;
@@ -80,6 +83,9 @@ using FeatherSword.Actions;
                 m_RB = GetComponent<Rigidbody2D>();
             if (!m_PDSys)
                 m_PDSys = GetComponent<AIPlayerDetection>();
+            if (!m_Player)
+                m_Player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+
 
         }
         private void Update()
@@ -97,15 +103,18 @@ using FeatherSword.Actions;
             */
 
             CheckForGround();
-            foreach (ActionBase action in m_UpdateActions)
+            if (!PlayerGettingDamageOrDead())
             {
-                action.CallAction(0, m_ActivateAction[0]);
-                action.CallAction(1);
-                action.CallAction(2);
-                action.CallAction(3);
-                action.CallAction(4, m_ActivateAction[4]);
-                action.CallAction(5);
-                action.CallAction(6);
+                foreach (ActionBase action in m_UpdateActions)
+                {
+                    action.CallAction(0, m_ActivateAction[0]);
+                    action.CallAction(1);
+                    action.CallAction(2);
+                    action.CallAction(3);
+                    action.CallAction(4, m_ActivateAction[4]);
+                    action.CallAction(5);
+                    action.CallAction(6);
+                }
             }
         }
         private void FixedUpdate()
@@ -121,15 +130,18 @@ using FeatherSword.Actions;
              * Action ID 6 = Block
             */
             m_ActivateAction[0] = m_PDSys.PlayerDetection2(m_RayMoveRange);
-            foreach (ActionBase action in m_FixedUpdateActions)
+            if (!PlayerGettingDamageOrDead())
             {
-                action.CallAction(0, m_ActivateAction[0]);
-                action.CallAction(1);
-                action.CallAction(2);
-                action.CallAction(3);
-                action.CallAction(4, m_ActivateAction[4]);
-                action.CallAction(5);
-                action.CallAction(6);
+                foreach (ActionBase action in m_FixedUpdateActions)
+                {
+                    action.CallAction(0, m_ActivateAction[0]);
+                    action.CallAction(1);
+                    action.CallAction(2);
+                    action.CallAction(3);
+                    action.CallAction(4, m_ActivateAction[4]);
+                    action.CallAction(5);
+                    action.CallAction(6);
+                }
             }
         }
         public void RegisterUpdateAction(ActionBase action)
@@ -172,6 +184,12 @@ using FeatherSword.Actions;
         {
             foreach (Animator anim in m_Animator)
                 anim.SetFloat(parameter, value);
+        }
+        
+        protected bool PlayerGettingDamageOrDead()
+        {
+            return m_Player.IsInAnimationTag("Damage")
+                || m_Player.IsInAnimationTag("Death");
         }
 
         public bool CheckForGround()

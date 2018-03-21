@@ -5,8 +5,9 @@ namespace FeatherSword.Actions.AIActions
 {
     public class EnemyMeleeAttack : ActionBase
     {
-        private AIController m_AIC;
-
+        protected AIController m_AIC;
+        [SerializeField]
+        protected float m_HoldAttackTime;
         // Use this for initialization
         private void Start()
         {
@@ -21,7 +22,7 @@ namespace FeatherSword.Actions.AIActions
             base.DoAction(data, status);
             AIMeleeAttack(status);
         }
-        private bool IsDoingSomething()
+        protected bool IsDoingSomething()
         {
             return m_AIC.IsInAnimationTag("Attack")
                 || m_AIC.IsInAnimationTag("Block")
@@ -37,8 +38,14 @@ namespace FeatherSword.Actions.AIActions
                 if (status)
                 {
                     m_AIC.SetAnimatorTrigger(AIController.AnimationTriggers.Attack);
+                    StartCoroutine(WaitToAttack());
                 }
             }
+        }
+        protected IEnumerator WaitToAttack()
+        {
+            yield return new WaitForSeconds(m_HoldAttackTime);
+            m_AIC.SetAnimatorTrigger(AIController.AnimationTriggers.DoAttack);
         }
     }
 }

@@ -64,8 +64,8 @@ GameObject:
   - component: {fileID: 114233782934228892}
   - component: {fileID: 114488101918858488}
   - component: {fileID: 50810799409394046}
+  - component: {fileID: 114122456804425288}
   - component: {fileID: 114850014412405096}
-  - component: {fileID: 114327226092549342}
   - component: {fileID: 114321350839935962}
   m_Layer: 9
   m_Name: Slime
@@ -1452,6 +1452,21 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114122456804425288
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1548699331898706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28897c0c990e04041ad5c217e964a8ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ActionID: 0
+  m_AIC: {fileID: 0}
+  m_MoveSpeed: 5
+  m_FacingRight: 0
 --- !u!114 &114233782934228892
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1469,6 +1484,7 @@ MonoBehaviour:
   - {fileID: 95822009908332814}
   m_RB: {fileID: 0}
   m_PDSys: {fileID: 0}
+  m_Player: {fileID: 0}
   m_RayMoveRange: 20
   m_RayMeleeAttackRange: 1.2
   m_RayRangedAttackRange: 6
@@ -1558,21 +1574,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ActionID: 4
---- !u!114 &114327226092549342
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1548699331898706}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 422e2abe2b924fa42b1dac2996519995, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ActionID: 0
-  m_AIC: {fileID: 0}
-  m_MoveSpeed: 1
-  m_RayRange: 8
+  m_HoldAttackTime: 0
 --- !u!114 &114488101918858488
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1584,12 +1586,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f52de0d4cef28c947bf7d6e027ea65db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaxHealth: 1
+  m_MaxHealth: 6.06
   m_CurHealth: 0
   m_PC: {fileID: 0}
   m_RB: {fileID: 50810799409394046}
   m_AIC: {fileID: 0}
   m_BodyCollider: {fileID: 60151674428645788}
+  m_CritCollider: {fileID: 0}
 --- !u!114 &114489916423087464
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5783,7 +5786,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b21eea3007530e4fb88370a26f3df95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_WeaponDamage: 0.2
+  m_WeaponDamage: 0
+  m_PushForce: {x: 2, y: 20}
 --- !u!114 &114850014412405096
 MonoBehaviour:
   m_ObjectHideFlags: 1

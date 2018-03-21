@@ -14,14 +14,15 @@ namespace FeatherSword.Actions.AIActions
         [SerializeField]
         protected bool m_FacingRight = false;
 
-        private void Start()
+        protected virtual void Start()
         {
             if(!m_AIC)
                 m_AIC = GetComponent<AIController>();
             if (m_AIC)
                 m_AIC.RegisterFixedUpdateAction(this);
         }
-        protected bool IsDoingSomething()
+
+        protected virtual bool IsDoingSomething()
         {
             return m_AIC.IsInAnimationTag("Attack")
                 || m_AIC.IsInAnimationTag("Block")
@@ -30,7 +31,7 @@ namespace FeatherSword.Actions.AIActions
                 || m_AIC.IsInAnimationTag("Damage")
                 || m_AIC.IsInAnimationTag("Death");
         }
-        protected void DirectionAdjustment()
+        protected virtual void DirectionAdjustment()
         {
             if (!m_FacingRight)
             {

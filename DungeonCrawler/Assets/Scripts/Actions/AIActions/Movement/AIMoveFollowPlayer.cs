@@ -7,13 +7,6 @@ namespace FeatherSword.Actions.AIActions
 {
     public class AIMoveFollowPlayer : EnemyMovement
     {
-        private void Start()
-        {
-            if (!m_AIC)
-                m_AIC = GetComponent<AIController>();
-            if (m_AIC)
-                m_AIC.RegisterFixedUpdateAction(this);
-        }
         public override void DoAction(float data, bool status)
         {
             base.DoAction(data, status);
@@ -34,8 +27,7 @@ namespace FeatherSword.Actions.AIActions
                 else
                 {
                     transform.localScale = new Vector3(1, 1, 0);
-                }
-                
+                }             
                 
             }
         }

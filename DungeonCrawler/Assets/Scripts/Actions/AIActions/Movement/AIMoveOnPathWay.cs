@@ -15,14 +15,7 @@ namespace FeatherSword.Actions.AIActions
         private List<Transform> m_WayPoint = new List<Transform>();
 
         private int m_WayPointAux;
-
-        private void Start()
-        {
-            if (!m_AIC)
-                m_AIC = GetComponent<AIController>();
-            if (m_AIC)
-                m_AIC.RegisterFixedUpdateAction(this);
-        }
+        
         public override void DoAction(float data, bool status)
         {
             base.DoAction(data, status);
@@ -57,7 +50,7 @@ namespace FeatherSword.Actions.AIActions
         {
             Vector3 holder = transform.position - m_WayPoint[nextPoint].position;
             holder.z = 0;
-            return holder;
+            return holder.normalized;
         }
     }
 }

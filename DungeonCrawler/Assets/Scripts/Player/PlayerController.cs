@@ -4,6 +4,9 @@ using UnityEngine;
 using FeatherSword.Actions;
 using FeatherSword.Input;
 
+
+namespace FeatherSword.Player
+{
     public class PlayerController : MonoBehaviour
     {
         public class AnimationTriggers
@@ -234,3 +237,4 @@ using FeatherSword.Input;
         }
     }
 
+}

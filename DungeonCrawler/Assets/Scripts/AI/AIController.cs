@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using FeatherSword.Actions;
+using FeatherSword.Player;
 
 namespace FeatherSword.AI {
     public class AIController : MonoBehaviour

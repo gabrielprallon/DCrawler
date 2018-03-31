@@ -20,7 +20,7 @@ namespace FeatherSword.Input
             }
         }
 
-        public Player m_Player;
+        public Rewired.Player m_Player;
         public Vector3 m_MoveVector;
         public bool m_KeyDown;
         public bool m_KeyUp;

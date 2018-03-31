@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FeatherSword.Actions;
 using FeatherSword.Input;
-
+using FeatherSword.Room;
 
 namespace FeatherSword.Player
 {
@@ -29,6 +29,9 @@ namespace FeatherSword.Player
             public static AnimationTriggers StartJump { get { return new AnimationTriggers("Jumping"); } }
             public static AnimationTriggers EndJump { get { return new AnimationTriggers("Landing"); } }
             public static AnimationTriggers Death { get { return new AnimationTriggers("Death"); } }
+            public static AnimationTriggers Respawn { get { return new AnimationTriggers("Spawn"); } }
+            public static AnimationTriggers LeaveRoom { get { return new AnimationTriggers("Leave"); } }
+            public static AnimationTriggers LandingDeath { get { return new AnimationTriggers("LandingDeath"); } }
         }
 
         [SerializeField]
@@ -164,6 +167,11 @@ namespace FeatherSword.Player
             }
         }
 
+        public void Die()
+        {
+            SetAnimatorTrigger(PlayerController.AnimationTriggers.Death);
+        }
+
         public bool IsInAnimationTag(string tag)
         {
             foreach (Animator anim in m_Animator)
@@ -214,6 +222,10 @@ namespace FeatherSword.Player
             {
                 onHitGroundEvent();
             }
+            if (IsInAnimationState("DeathFallingLoop"))
+            {
+                SetAnimatorTrigger(AnimationTriggers.LandingDeath);
+            }
         }
 
         protected void OnLeaveGround()
@@ -225,6 +237,31 @@ namespace FeatherSword.Player
                 onLeaveGroundEvent();
             }
         }
+
+        public void Respawn()
+        {
+            StartCoroutine(RespawnPlayer());
+        }
+
+        IEnumerator RespawnPlayer()
+        {
+
+            SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer>();
+            foreach (SpriteRenderer sr in renderers)
+            {
+                sr.enabled = false;
+            }
+            transform.position = RoomManager.Instance.CurrentRoom.StartRespawn();
+            yield return new WaitForSeconds(1f);
+            SetAnimatorTrigger(AnimationTriggers.Respawn);
+            foreach (SpriteRenderer sr in renderers)
+            {
+                sr.enabled = true;
+            }
+            yield return new WaitForSeconds(1f);
+            RoomManager.Instance.CurrentRoom.EndRespawn();
+        }
+
         void OnDrawGizmos()
         {
             if (m_ShowGroundDetectionDebug)

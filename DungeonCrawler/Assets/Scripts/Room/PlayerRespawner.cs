@@ -39,6 +39,12 @@ namespace FeatherSword.Room
             }
         }
 
+
+        public Vector3 GetNextSpawnPoint()
+        {
+            return m_SpawnPoint.position;
+        }
+
         private void OnDrawGizmosSelected()
         {
             if (m_SpawnPoint)

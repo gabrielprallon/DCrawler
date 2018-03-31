@@ -21,6 +21,10 @@ public class HealthSystem : MonoBehaviour {
     private PolygonCollider2D m_BodyCollider;
     [SerializeField]
     private PolygonCollider2D m_CritCollider;
+
+    [SerializeField]
+    private GameObject m_DeadBody;
+
 	// Use this for initialization
 	void Start () {
 
@@ -60,13 +64,31 @@ public class HealthSystem : MonoBehaviour {
     {
         if(m_PC)
         {
-            if(!IsDying())
-                m_PC.SetAnimatorTrigger(PlayerController.AnimationTriggers.Death);    
+            if (!IsDying())
+            {
+                m_PC.Die();
+                if (m_DeadBody)
+                    StartCoroutine(SpawnDeadBody());
+                else
+                    m_PC.Respawn();
+            }
         }
     }
+
+    private IEnumerator SpawnDeadBody()
+    {
+        while (!m_PC.IsInAnimationTag("Dead")) { 
+            yield return null;
+        }
+        GameObject go = Instantiate(m_DeadBody);
+        m_DeadBody.transform.position = m_PC.transform.position;
+        m_PC.Respawn();
+        m_CurHealth = m_MaxHealth;
+    }
+
     private bool IsDying()
     {
-        return m_PC.IsInAnimationTag("Die");
+        return m_PC.IsInAnimationTag("Death");
     }
 
 

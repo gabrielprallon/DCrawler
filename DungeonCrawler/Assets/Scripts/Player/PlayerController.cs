@@ -210,6 +210,10 @@ namespace FeatherSword.Player
             {
                 OnLeaveGround();
             }
+            if (grounded && IsInAnimationState("DeathFallingLoop"))
+            {
+                SetAnimatorTrigger(AnimationTriggers.LandingDeath);
+            }
             m_IsGrounded = grounded;
             return IsGrounded;
         }
@@ -221,10 +225,6 @@ namespace FeatherSword.Player
             if (onHitGroundEvent != null)
             {
                 onHitGroundEvent();
-            }
-            if (IsInAnimationState("DeathFallingLoop"))
-            {
-                SetAnimatorTrigger(AnimationTriggers.LandingDeath);
             }
         }
 
@@ -238,6 +238,10 @@ namespace FeatherSword.Player
             }
         }
 
+        public bool IsDying()
+        {
+            return IsInAnimationTag("Death") || IsInAnimationTag("Dead") || IsInAnimationTag("Respawn");
+        }
         public void Respawn()
         {
             StartCoroutine(RespawnPlayer());

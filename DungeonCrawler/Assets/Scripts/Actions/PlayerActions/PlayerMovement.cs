@@ -104,7 +104,7 @@ namespace FeatherSword.Actions {
                 }
                 else
                 {
-                    if (!m_PC.IsInAnimationState("Idle"))
+                    if (!m_PC.IsInAnimationState("Idle") && !m_PC.IsDying())
                         m_PC.SetAnimatorTrigger(PlayerController.AnimationTriggers.Idle);
                 }
             }

@@ -59,18 +59,22 @@ public class HealthSystem : MonoBehaviour {
         }
 
     }
-
+    private bool m_Dying = false;
     private void Die()
     {
         if(m_PC)
         {
-            if (!IsDying())
+            if (!IsDying() && !m_Dying)
             {
+                m_Dying = true;
                 m_PC.Die();
                 if (m_DeadBody)
                     StartCoroutine(SpawnDeadBody());
                 else
+                {
+                    m_CurHealth = m_MaxHealth;
                     m_PC.Respawn();
+                }
             }
         }
     }
@@ -80,15 +84,20 @@ public class HealthSystem : MonoBehaviour {
         while (!m_PC.IsInAnimationTag("Dead")) { 
             yield return null;
         }
-        GameObject go = Instantiate(m_DeadBody);
-        m_DeadBody.transform.position = m_PC.transform.position;
-        m_PC.Respawn();
         m_CurHealth = m_MaxHealth;
+        yield return new WaitForSeconds(0.2f);
+        GameObject go = Instantiate(m_DeadBody);
+        go.transform.localScale = m_PC.transform.localScale;
+        go.transform.SetParent(m_PC.transform);
+        go.transform.localPosition = Vector3.zero;
+        go.transform.parent = m_PC.transform.parent;
+        m_PC.Respawn();
+        m_Dying = false;
     }
 
     private bool IsDying()
     {
-        return m_PC.IsInAnimationTag("Death");
+        return m_PC.IsInAnimationTag("Death") || m_PC.IsInAnimationTag("Dead") || m_PC.IsInAnimationTag("Respawn") || m_Dying;
     }
 
 

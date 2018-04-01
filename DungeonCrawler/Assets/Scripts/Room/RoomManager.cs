@@ -18,6 +18,9 @@ namespace FeatherSword.Room
         }
 
         [SerializeField]
+        private Room m_InitialRoom;
+
+        [SerializeField]
         private List<GameObject> m_Rooms;
             
         private Room m_CurrentRoom;
@@ -25,6 +28,7 @@ namespace FeatherSword.Room
         private void Awake()
         {
             m_Instance = this;
+            m_CurrentRoom = m_InitialRoom;
         }
     }
 }
